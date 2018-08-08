@@ -3,12 +3,16 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import org.w3c.dom.Text;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -49,6 +53,31 @@ public class DetailActivity extends AppCompatActivity {
                 .into(ingredientsIv);
 
         setTitle(sandwich.getMainName());
+
+        //set also known as textView
+        TextView  akaTextView = findViewById(R.id.also_known_tv);
+
+        for (String aka : sandwich.getAlsoKnownAs()) {
+            akaTextView.append(aka +"\n");
+        }
+
+        //set ingredients textView
+        TextView ingredientsTextView = findViewById(R.id.ingredients_tv);
+
+        for (String ingredient : sandwich.getIngredients()) {
+            ingredientsTextView.append(ingredient +"\n");
+        }
+
+        //set place of origin TextView
+
+        TextView placeOfOrigin = findViewById(R.id.origin_tv);
+        placeOfOrigin.setText(sandwich.getPlaceOfOrigin()+"\n");
+
+        //set Description TextView
+
+        TextView descriptionTextView = findViewById(R.id.description_tv);
+        descriptionTextView.setText(sandwich.getDescription());
+
     }
 
     private void closeOnError() {
@@ -57,6 +86,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI() {
+
+
 
     }
 }
